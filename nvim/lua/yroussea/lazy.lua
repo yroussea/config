@@ -12,9 +12,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	--FZF
+	--FZF and file parcours
 	"nvim-lua/plenary.nvim",
 	{ "nvim-telescope/telescope.nvim", tag = '0.1.2' },
+	"theprimeagen/harpoon",
 
 	--THEMES
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
@@ -22,14 +23,19 @@ require("lazy").setup({
 
 	--treesiter (color)
 	{"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
-	
+	{
+		"RRethy/vim-illuminate",
+		lazy = false, config = function()
+			require('illuminate').configure({})
+		end
+	},
+
 	--ZELLIJ (TMUX LIKE)
 	'Lilja/zellij.nvim',
 
 	--NERDTREE (IDK WHY IT DOESNT WORK FOR ME, BUT IDC I HUSE TELESCOPE)
 	'preservim/nerdtree',
 	"ryanoasis/vim-devicons",
-	"tiagofumo/vim-nerdtree-syntax-highlight",
 
 	--TMUX
 	{
@@ -58,5 +64,28 @@ require("lazy").setup({
 
 	--42HEADER
 	{ "Diogo-ss/42-header.nvim", lazy = false },
+
+	--LSP
+	{
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v2.x',
+		dependencies = {
+			-- LSP Support
+			{'neovim/nvim-lspconfig'},             -- Required
+			{'williamboman/mason.nvim'},           -- Optional
+			{'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+			-- Autocompletion
+			{'hrsh7th/nvim-cmp'},     -- Required
+			{'hrsh7th/cmp-nvim-lsp'}, -- Required
+			{'L3MON4D3/LuaSnip'},     -- Required
+		}
+	},
+	--COMMENTS
+	{
+		'numToStr/Comment.nvim',
+		opts = {},
+		lazy = false,
+	},
 })
 
